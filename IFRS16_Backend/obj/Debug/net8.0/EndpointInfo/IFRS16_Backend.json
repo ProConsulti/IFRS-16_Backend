@@ -1,0 +1,2421 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "IFRS16 API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Currency/GetAllCurrencies": {
+      "get": {
+        "tags": [
+          "Currency"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CurrenciesTable"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CurrenciesTable"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CurrenciesTable"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Disclosure/Get": {
+      "post": {
+        "tags": [
+          "Disclosure"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisclosureTable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisclosureTable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisclosureTable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Disclosure/GetDisclouserMaturityAnalysis": {
+      "post": {
+        "tags": [
+          "Disclosure"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisclouserMaturityAnalysisTable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisclouserMaturityAnalysisTable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisclouserMaturityAnalysisTable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ExchangeRate/all/{currencyId}": {
+      "get": {
+        "tags": [
+          "ExchangeRate"
+        ],
+        "parameters": [
+          {
+            "name": "currencyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ExchangeRate": {
+      "post": {
+        "tags": [
+          "ExchangeRate"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddExchangeRateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddExchangeRateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddExchangeRateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ExchangeRate/batch/{ids}": {
+      "delete": {
+        "tags": [
+          "ExchangeRate"
+        ],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InitialRecognition/Add": {
+      "post": {
+        "tags": [
+          "InitialRecognition"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InitialRecognition/Modify": {
+      "post": {
+        "tags": [
+          "InitialRecognition"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormModification"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormModification"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormModification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InitialRecognition/Get": {
+      "post": {
+        "tags": [
+          "InitialRecognition"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/InitialRecognition/{leaseId}": {
+      "get": {
+        "tags": [
+          "InitialRecognition"
+        ],
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionTable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionTable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialRecognitionTable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/JournalEntries/Get": {
+      "post": {
+        "tags": [
+          "JournalEntries"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalEntryResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalEntryResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalEntryResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/JournalEntries/{leaseId}": {
+      "get": {
+        "tags": [
+          "JournalEntries"
+        ],
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalEntryTable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalEntryTable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalEntryTable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData": {
+      "post": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/GetAllLeasesForCompany": {
+      "get": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LeaseFormData"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LeaseFormData"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LeaseFormData"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/GetAllLeases": {
+      "post": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseFormData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseFormData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseFormData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExtendedLeaseDataSP"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExtendedLeaseDataSP"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExtendedLeaseDataSP"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/GetLeaseById/{leaseId}": {
+      "get": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseFormData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseFormData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseFormData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/BulkImport": {
+      "post": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LeaseFormData"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LeaseFormData"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LeaseFormData"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/Delete": {
+      "post": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteLeaseData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteLeaseData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteLeaseData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/TerminateLease": {
+      "post": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminateLease"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminateLease"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminateLease"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/ModifyLease": {
+      "post": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/UploadLeaseContract": {
+      "post": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "LeaseId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ContractDoc": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "LeaseId": {
+                  "style": "form"
+                },
+                "ContractDoc": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/UpdateLeaseContract/{leaseId}": {
+      "put": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "LeaseId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ContractDoc": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "LeaseId": {
+                  "style": "form"
+                },
+                "ContractDoc": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/GetLeaseContract/{leaseId}": {
+      "get": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LeaseFormData/UpdateLease/{leaseId}": {
+      "put": {
+        "tags": [
+          "LeaseFormData"
+        ],
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseFormData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LeaseLiability/Add": {
+      "post": {
+        "tags": [
+          "LeaseLiability"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseLiabilityRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseLiabilityRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseLiabilityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseLiabilityTable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseLiabilityTable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseLiabilityTable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/LeaseLiability/Get": {
+      "post": {
+        "tags": [
+          "LeaseLiability"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseLiabilityResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseLiabilityResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseLiabilityResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/LeaseLiability/{leaseId}": {
+      "get": {
+        "tags": [
+          "LeaseLiability"
+        ],
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseLiabilityTable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseLiabilityTable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaseLiabilityTable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Logout": {
+      "post": {
+        "tags": [
+          "Logout"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RemeasureFCLeases": {
+      "post": {
+        "tags": [
+          "RemeasureFCLeases"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemeasureFCRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemeasureFCRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemeasureFCRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reports/AllLeaseReport": {
+      "post": {
+        "tags": [
+          "Reports"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllLeasesReportTable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllLeasesReportTable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllLeasesReportTable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Reports/LeaseReportSummary": {
+      "post": {
+        "tags": [
+          "Reports"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllLeasesReportTable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllLeasesReportTable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllLeasesReportTable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Reports/JournalEntryReport": {
+      "post": {
+        "tags": [
+          "Reports"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaseReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalEntryReport"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalEntryReport"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalEntryReport"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ROUSchedule/Add": {
+      "post": {
+        "tags": [
+          "ROUSchedule"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ROUScheduleRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ROUScheduleRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ROUScheduleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ROUScheduleTable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ROUScheduleTable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ROUScheduleTable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ROUSchedule/Get": {
+      "post": {
+        "tags": [
+          "ROUSchedule"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetLeaseDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ROUScheduleResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ROUScheduleResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ROUScheduleResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ROUSchedule/{leaseId}": {
+      "get": {
+        "tags": [
+          "ROUSchedule"
+        ],
+        "parameters": [
+          {
+            "name": "leaseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ROUScheduleTable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ROUScheduleTable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ROUScheduleTable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SessionToken/Upsert": {
+      "post": {
+        "tags": [
+          "SessionToken"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddExchangeRateDto": {
+        "type": "object",
+        "properties": {
+          "currencyID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "exchangeRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "exchangeDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AllLeasesReportTable": {
+        "type": "object",
+        "properties": {
+          "leaseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leaseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "rental": {
+            "type": "number",
+            "format": "double"
+          },
+          "frequency": {
+            "type": "string",
+            "nullable": true
+          },
+          "commencementDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "openingLL": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "interest": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "payment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "closingLL": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "openingROU": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "amortization": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "closingROU": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "exchange_Gain_Loss": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "modificationAdjustmentLL": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currencyID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "currencyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "additionsDuringYearLL": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "additionsDuringYearROU": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "modificationAdjustmentROU": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CurrenciesTable": {
+        "type": "object",
+        "properties": {
+          "currencyID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currencyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomInitialRecognitionTable": {
+        "type": "object",
+        "properties": {
+          "serialNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "rental": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteLeaseData": {
+        "type": "object",
+        "properties": {
+          "leaseIds": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DisclosureTable": {
+        "type": "object",
+        "properties": {
+          "openingLL": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "interest": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "payment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "closingLL": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "openingROU": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "amortization": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "closingROU": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "exchange_Gain_Loss": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "modificationAdjustmentLL": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "modificationAdjustmentROU": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "additionsDuringYearLL": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "additionsDuringYearROU": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DisclouserMaturityAnalysisTable": {
+        "type": "object",
+        "properties": {
+          "lessThanOneYear": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "betweenOneAndFiveYears": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "afterFiveYears": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExtendedLeaseDataSP": {
+        "type": "object",
+        "properties": {
+          "leaseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leaseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "rental": {
+            "type": "number",
+            "format": "double"
+          },
+          "commencementDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "annuity": {
+            "type": "string",
+            "nullable": true
+          },
+          "ibr": {
+            "type": "number",
+            "format": "double"
+          },
+          "frequency": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "idc": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "grv": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "companyID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currencyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "assetType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetLeaseDetails": {
+        "type": "object",
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leaseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetLeaseFormData": {
+        "type": "object",
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "companyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leaseName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InitialRecognitionResult": {
+        "type": "object",
+        "properties": {
+          "totalNPV": {
+            "type": "number",
+            "format": "double"
+          },
+          "initialRecognition": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InitialRecognitionTable"
+            },
+            "nullable": true
+          },
+          "cashFlow": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "dates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "nullable": true
+          },
+          "totalRecords": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InitialRecognitionTable": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leaseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serialNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "rental": {
+            "type": "number",
+            "format": "double"
+          },
+          "npv": {
+            "type": "number",
+            "format": "double"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "JournalEntryReport": {
+        "type": "object",
+        "properties": {
+          "particular": {
+            "type": "string",
+            "nullable": true
+          },
+          "debit": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "credit": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "JournalEntryResult": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JournalEntryTable"
+            },
+            "nullable": true
+          },
+          "totalRecords": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "JournalEntryTable": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leaseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jE_Date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "particular": {
+            "type": "string",
+            "nullable": true
+          },
+          "debit": {
+            "type": "number",
+            "format": "double"
+          },
+          "credit": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LeaseFormData": {
+        "type": "object",
+        "properties": {
+          "leaseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "leaseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "rental": {
+            "type": "number",
+            "format": "double"
+          },
+          "commencementDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "annuity": {
+            "type": "string",
+            "nullable": true
+          },
+          "ibr": {
+            "type": "number",
+            "format": "double"
+          },
+          "frequency": {
+            "type": "string",
+            "nullable": true
+          },
+          "idc": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "grv": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "incrementalFrequency": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "assetType": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rouOpening": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "llOpening": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rouExRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "customIRTable": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomInitialRecognitionTable"
+            },
+            "nullable": true
+          },
+          "isChangeInScope": {
+            "type": "boolean"
+          },
+          "reportingCurrencyID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LeaseFormModification": {
+        "type": "object",
+        "properties": {
+          "leaseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "leaseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "rental": {
+            "type": "number",
+            "format": "double"
+          },
+          "modificationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "commencementDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "annuity": {
+            "type": "string",
+            "nullable": true
+          },
+          "ibr": {
+            "type": "number",
+            "format": "double"
+          },
+          "frequency": {
+            "type": "string",
+            "nullable": true
+          },
+          "idc": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "grv": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "incrementalFrequency": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currencyID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rouOpening": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rouExRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LeaseLiabilityRequest": {
+        "type": "object",
+        "properties": {
+          "totalNPV": {
+            "type": "number",
+            "format": "double"
+          },
+          "cashFlow": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "dates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "nullable": true
+          },
+          "leaseData": {
+            "$ref": "#/components/schemas/LeaseFormData"
+          },
+          "reportingCurrencyID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LeaseLiabilityResult": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LeaseLiabilityTable"
+            },
+            "nullable": true
+          },
+          "totalRecords": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LeaseLiabilityTable": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leaseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leaseLiability_Date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "opening": {
+            "type": "number",
+            "format": "double"
+          },
+          "interest": {
+            "type": "number",
+            "format": "double"
+          },
+          "payment": {
+            "type": "number",
+            "format": "double"
+          },
+          "closing": {
+            "type": "number",
+            "format": "double"
+          },
+          "exchange_Gain_Loss": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "modificationAdjustment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LeaseReportRequest": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "leaseIdList": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ROUScheduleRequest": {
+        "type": "object",
+        "properties": {
+          "leaseData": {
+            "$ref": "#/components/schemas/LeaseFormData"
+          },
+          "totalNPV": {
+            "type": "number",
+            "format": "double"
+          },
+          "reportingCurrencyID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ROUScheduleResult": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ROUScheduleTable"
+            },
+            "nullable": true
+          },
+          "totalRecords": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ROUScheduleTable": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leaseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roU_Date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "opening": {
+            "type": "number",
+            "format": "double"
+          },
+          "amortization": {
+            "type": "number",
+            "format": "double"
+          },
+          "closing": {
+            "type": "number",
+            "format": "double"
+          },
+          "modificationAdjustment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RemeasureFCRequest": {
+        "type": "object",
+        "properties": {
+          "currencyID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "remeasurementDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reportingCurrencyID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TerminateLease": {
+        "type": "object",
+        "properties": {
+          "terminateDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "penalty": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "leaseId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpsertRequest": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Don't enter 'Bearer', only enter token in the text input below.\r\n\r\nExample: '12345abcdef'",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
