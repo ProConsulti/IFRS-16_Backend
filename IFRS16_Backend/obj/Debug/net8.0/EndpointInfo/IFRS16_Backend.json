@@ -139,6 +139,28 @@
         }
       }
     },
+    "/api/Download/leaseTemplate/{fileName}": {
+      "get": {
+        "tags": [
+          "Download"
+        ],
+        "parameters": [
+          {
+            "name": "fileName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/ExchangeRate/all/{currencyId}": {
       "get": {
         "tags": [
