@@ -136,6 +136,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "IFRS16_Backend.Controllers.HealthCheckController",
+    "Method": "Get",
+    "RelativePath": "api/HealthCheck",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "IFRS16_Backend.Controllers.InitialRecognitionController",
     "Method": "GetAllInitialRecognitionForLease",
     "RelativePath": "api/InitialRecognition/{leaseId}",

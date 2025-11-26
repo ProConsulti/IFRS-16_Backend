@@ -1,4 +1,4 @@
-using IFRS16_Backend.Helper;
+﻿using IFRS16_Backend.Helper;
 using IFRS16_Backend.Middleware;
 using IFRS16_Backend.Models;
 using IFRS16_Backend.Services.Currencies;
@@ -121,6 +121,14 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+// ⭐ Migration Runs here
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
+
 
 app.UseCors("AllowAllOrigins");
 // Configure the HTTP request pipeline.

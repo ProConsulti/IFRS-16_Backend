@@ -237,6 +237,18 @@
         }
       }
     },
+    "/api/HealthCheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/InitialRecognition/Add": {
       "post": {
         "tags": [

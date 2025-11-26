@@ -1,12 +1,11 @@
 {
   "Version": 1,
-  "Hash": "3tjonwAZD4vjSQjYLtv+30Nry1zZuO4NyR/UNHu1fQA=",
+  "Hash": "XnBevsSCGbGTt9GHTtZOZl3cXelcYvrFpQEqehkhSK0=",
   "Source": "IFRS16_Backend",
   "BasePath": "_content/IFRS16_Backend",
   "Mode": "Default",
   "ManifestType": "Publish",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }
