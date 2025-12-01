@@ -4,6 +4,7 @@ using IFRS16_Backend.Models;
 using IFRS16_Backend.Services.Currencies;
 using IFRS16_Backend.Services.Downlaod;
 using IFRS16_Backend.Services.ExchangeRate;
+using IFRS16_Backend.Services.Export;
 using IFRS16_Backend.Services.InitialRecognition;
 using IFRS16_Backend.Services.JournalEntries;
 using IFRS16_Backend.Services.LeaseData;
@@ -69,6 +70,9 @@ builder.Services.AddScoped<IExchangeRateService, ExchangeRateService>();
 builder.Services.AddScoped<IRemeasureFCLService, RemeasureFCLService>();
 builder.Services.AddScoped<ISessionTokenService, SessionTokenService>();
 builder.Services.AddScoped<IDownloadService, DownloadService>();
+builder.Services.AddScoped<IExportService, ExportService>();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
