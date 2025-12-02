@@ -12,46 +12,67 @@ namespace IFRS16_Backend.Services.Export
     {
         private readonly ApplicationDbContext _context = context;
 
-        public async Task<string> ExportCompanyData(int companyId)
+        public async Task<(byte[] Content, string FileName)> ExportCompanyData(int companyId)
         {
-            // create unique folder for this export
-            string root = Path.Combine(AppContext.BaseDirectory, "Exports");
-            Directory.CreateDirectory(root);
+            // build files in memory using temporary directories in memory stream -> zip
+            using var tempStream = new MemoryStream();
+            using (var archive = new ZipArchive(tempStream, ZipArchiveMode.Create, true))
+            {
+                // LeaseData
+                var leaseDataEntry = archive.CreateEntry("LeaseData.sql");
+                using (var entryStream = leaseDataEntry.Open())
+                using (var writer = new StreamWriter(entryStream, Encoding.UTF8))
+                {
+                    await WriteTableToWriter("LeaseData", $"CompanyID = {companyId}", writer);
+                }
 
-            string folder = Path.Combine(root, $"Company_{companyId}_{DateTime.Now:yyyyMMddHHmmss}");
-            Directory.CreateDirectory(folder);
+                // Related tables
+                var irEntry = archive.CreateEntry("InitialRecognition.sql");
+                using (var entryStream = irEntry.Open())
+                using (var writer = new StreamWriter(entryStream, Encoding.UTF8))
+                {
+                    await WriteTableToWriter("InitialRecognition", "LeaseID IN (SELECT LeaseID FROM LeaseData WHERE CompanyID = " + companyId + ")", writer);
+                }
 
-            // Export each table to its own .sql file
-            await ExportTable("LeaseData", $"CompanyID = {companyId}", Path.Combine(folder, "LeaseData.sql"));
-            await ExportRelated("InitialRecognition", "LeaseID", "LeaseData", companyId, Path.Combine(root, "InitialRecognition.sql"));
-            await ExportRelated("LeaseLiability", "LeaseID", "LeaseData", companyId, Path.Combine(root, "LeaseLiability.sql"));
-            await ExportRelated("ROUSchedule", "LeaseID", "LeaseData", companyId, Path.Combine(root, "ROUSchedule.sql"));
-            await ExportRelated("JournalEntries", "LeaseID", "LeaseData", companyId, Path.Combine(root, "JournalEntries.sql"));
+                var llEntry = archive.CreateEntry("LeaseLiability.sql");
+                using (var entryStream = llEntry.Open())
+                using (var writer = new StreamWriter(entryStream, Encoding.UTF8))
+                {
+                    await WriteTableToWriter("LeaseLiability", "LeaseID IN (SELECT LeaseID FROM LeaseData WHERE CompanyID = " + companyId + ")", writer);
+                }
 
-            // create zip
-            string zipPath = Path.Combine(root, $"Company_{companyId}_Export_{DateTime.Now:yyyyMMddHHmmss}.zip");
+                var rouEntry = archive.CreateEntry("ROUSchedule.sql");
+                using (var entryStream = rouEntry.Open())
+                using (var writer = new StreamWriter(entryStream, Encoding.UTF8))
+                {
+                    await WriteTableToWriter("ROUSchedule", "LeaseID IN (SELECT LeaseID FROM LeaseData WHERE CompanyID = " + companyId + ")", writer);
+                }
 
-            // If zip exists, delete
-            if (File.Exists(zipPath)) File.Delete(zipPath);
+                var jeEntry = archive.CreateEntry("JournalEntries.sql");
+                using (var entryStream = jeEntry.Open())
+                using (var writer = new StreamWriter(entryStream, Encoding.UTF8))
+                {
+                    await WriteTableToWriter("JournalEntries", "LeaseID IN (SELECT LeaseID FROM LeaseData WHERE CompanyID = " + companyId + ")", writer);
+                }
+            }
 
-            ZipFile.CreateFromDirectory(folder, zipPath, CompressionLevel.Optimal, false);
-
-            return zipPath;
+            tempStream.Position = 0;
+            var bytes = tempStream.ToArray();
+            string fileName = $"Company_{companyId}_Export_{DateTime.Now:yyyyMMddHHmmss}.zip";
+            return (bytes, fileName);
         }
 
-
-        private async Task ExportRelated(string table, string foreignKey, string parent, int companyId, string filePath)
+        private async Task WriteTableToWriter(string table, string where, StreamWriter writer)
         {
-            string where = $"{foreignKey} IN (SELECT LeaseID FROM {parent} WHERE CompanyID = {companyId})";
-            await ExportTable(table, where, filePath);
-        }
-
-        private async Task ExportTable(string table, string where, string filePath)
-        {
-            using var writer = new StreamWriter(filePath, false, Encoding.UTF8);
-
             writer.WriteLine($"-- Export of {table}");
             writer.WriteLine();
+
+            bool isLeaseData = table.Equals("LeaseData", StringComparison.OrdinalIgnoreCase);
+            if (isLeaseData)
+            {
+                writer.WriteLine($"SET IDENTITY_INSERT [{table}] ON;");
+                writer.WriteLine();
+            }
 
             int batch = 10000;
             int offset = 0;
@@ -71,14 +92,34 @@ namespace IFRS16_Backend.Services.Export
 
                 foreach (var row in rows)
                 {
-                    string columns = string.Join(",", row.Keys);
-                    string values = string.Join(",", row.Values.Select(FormatValue));
+                    // Determine columns to exclude: for LeaseData skip LeaseID; for other tables skip ID (identity)
+                    var excludedColumn = "ID";
+
+                    var allColumns = row.Keys.ToList();
+                    var columnsToInclude = allColumns
+                        .Where(c => !string.Equals(c, excludedColumn, StringComparison.OrdinalIgnoreCase))
+                        .ToList();
+
+                    if (columnsToInclude.Count == 0)
+                        continue; // nothing to insert after exclusion
+
+                    string columns = string.Join(",", columnsToInclude.Select(c => $"[{c}]"));
+                    string values = string.Join(",", columnsToInclude.Select(c => FormatValue(row[c])));
 
                     writer.WriteLine($"INSERT INTO {table} ({columns}) VALUES ({values});");
                 }
 
                 offset += batch;
             }
+
+            if (isLeaseData)
+            {
+                writer.WriteLine();
+                writer.WriteLine($"SET IDENTITY_INSERT [{table}] OFF;");
+            }
+
+
+            await writer.FlushAsync();
         }
 
         private static string FormatValue(object v)

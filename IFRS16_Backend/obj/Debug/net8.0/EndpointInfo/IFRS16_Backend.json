@@ -237,15 +237,16 @@
         }
       }
     },
-    "/api/Export/LeaseData": {
-      "post": {
+    "/api/Export/LeaseData/{companyId}": {
+      "get": {
         "tags": [
           "Export"
         ],
         "parameters": [
           {
             "name": "companyId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -264,6 +265,36 @@
         "tags": [
           "HealthCheck"
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Import/UploadZip": {
+      "post": {
+        "tags": [
+          "Import"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "File"
+                ],
+                "type": "object",
+                "properties": {
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -862,24 +893,15 @@
           "content": {
             "multipart/form-data": {
               "schema": {
+                "required": [
+                  "ContractDoc"
+                ],
                 "type": "object",
                 "properties": {
-                  "LeaseId": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
                   "ContractDoc": {
                     "type": "string",
                     "format": "binary"
                   }
-                }
-              },
-              "encoding": {
-                "LeaseId": {
-                  "style": "form"
-                },
-                "ContractDoc": {
-                  "style": "form"
                 }
               }
             }
@@ -912,24 +934,15 @@
           "content": {
             "multipart/form-data": {
               "schema": {
+                "required": [
+                  "ContractDoc"
+                ],
                 "type": "object",
                 "properties": {
-                  "LeaseId": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
                   "ContractDoc": {
                     "type": "string",
                     "format": "binary"
                   }
-                }
-              },
-              "encoding": {
-                "LeaseId": {
-                  "style": "form"
-                },
-                "ContractDoc": {
-                  "style": "form"
                 }
               }
             }

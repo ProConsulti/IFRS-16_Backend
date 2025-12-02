@@ -5,6 +5,7 @@ using IFRS16_Backend.Services.Currencies;
 using IFRS16_Backend.Services.Downlaod;
 using IFRS16_Backend.Services.ExchangeRate;
 using IFRS16_Backend.Services.Export;
+using IFRS16_Backend.Services.Import;
 using IFRS16_Backend.Services.InitialRecognition;
 using IFRS16_Backend.Services.JournalEntries;
 using IFRS16_Backend.Services.LeaseData;
@@ -15,6 +16,7 @@ using IFRS16_Backend.Services.RemeasurementFCL;
 using IFRS16_Backend.Services.Report;
 using IFRS16_Backend.Services.ROUSchedule;
 using IFRS16_Backend.Services.SessionToken;
+using IFRS16_Backend.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -71,6 +73,7 @@ builder.Services.AddScoped<IRemeasureFCLService, RemeasureFCLService>();
 builder.Services.AddScoped<ISessionTokenService, SessionTokenService>();
 builder.Services.AddScoped<IDownloadService, DownloadService>();
 builder.Services.AddScoped<IExportService, ExportService>();
+builder.Services.AddScoped<IImportService, ImportService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -102,6 +105,8 @@ builder.Services.AddSwaggerGen(c =>
             new List<string>()
         }
     });
+
+    c.OperationFilter<SwaggerFileUploadOperationFilter>();
 });
 
 // Add services to the container.

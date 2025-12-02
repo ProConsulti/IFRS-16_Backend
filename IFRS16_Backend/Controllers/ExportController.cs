@@ -11,18 +11,14 @@ namespace IFRS16_Backend.Controllers
     {
         private readonly IExportService _export = export;
 
-        [HttpPost("LeaseData")]
+        [HttpGet("LeaseData/{companyId}")]
         public async Task<IActionResult> ExportCompany(int companyId)
-        { // start export (this runs synchronously in request — if it takes too long, consider background job)
-            var zipPath = await _export.ExportCompanyData(companyId);
-
-            if (!System.IO.File.Exists(zipPath))
+        {
+            var result = await _export.ExportCompanyData(companyId);
+            if (result.Content == null || result.Content.Length == 0)
                 return NotFound("Export failed.");
 
-            var fs = new FileStream(zipPath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var result = File(fs, "application/zip", Path.GetFileName(zipPath));
-            // Optionally: You can schedule deletion of zipPath after some time.
-            return result;
+            return File(result.Content, "application/zip", result.FileName);
         }
     }
 }
